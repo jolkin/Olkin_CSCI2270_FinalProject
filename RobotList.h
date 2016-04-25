@@ -23,7 +23,7 @@ struct Robot
 
 struct Alliance
 {
-    Robot[] robots;
+    Robot *robots[];
     Alliance(Robot r1, Robot r2, Robot r3)
     {
         robots = new Robot[3];
@@ -31,6 +31,7 @@ struct Alliance
         robots[1] = r2;
         robots[2] = r3;
     }
+    Alliance *next;
 };
 
 class RobotList
@@ -41,12 +42,24 @@ public:
     void printList();
     void addRobot(string n, int p, int y);
     void deleteRobot(string n);
+    void sortByName(Robot *robots, int low, int high, int size);
+    void sortByOffensivePower(Robot *robots, int low, int high, int size);
+    void sortByYear(Robot *robots, int low, int high, int size);
+    void createAlliance(string team1, string team2, string team3);
     void sortByName();
     void sortByOffensivePower();
     void sortByYear();
-    int listSize();
-    void createAlliance(string team1, string team2, string team3);
     void printAlliances();
+    Robot *find(string name);
+
+
+private:
+    int tableSize = 12;
+    Robot *robots[];
+    Alliance *start;
+    void mergeName(Robot *robots, int low, int high, int size);
+    void mergeYear(Robot *robots, int low, int high, int size);
+    void mergePower(Robot *robots, int low, int high, int size);
 };
 
 #endif //OLKIN_CSCI2270_FINALPROJECT_ROBOTLIST_H
