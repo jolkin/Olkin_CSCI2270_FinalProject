@@ -34,6 +34,9 @@ RobotList *createPool()
     out->addRobot("Chronic", 4, 2012);
     out->addRobot("Complete Control Mk V", 8, 2005);
     out->addRobot("Counter Revolution", 5, 2009);
+    out->addRobot("Last year's robot", 5, 2009);
+    out->addRobot("Adventure", 5, 2009);
+    out->addRobot("finish him", 5, 2009);
 
     return out;
 
@@ -70,14 +73,14 @@ int main(int argc, char *argv[])
                 cout<<"Enter name:"<<endl;
                 string title;
                 getline(cin, title);
-                Robot *target = pool->find(title);
-                if(target == NULL)
+                Robot target = pool->find(title);
+                if(target.name.compare("") == 0)
                 {
                     cout<<"That robot doesn't exist in the pool"<<endl;
                 }
                 else
                 {
-                    list->addRobot(target->name, target->offensivePower, target->yearEst);
+                    list->addRobot(target.name, target.offensivePower, target.yearEst);
                     pool->deleteRobot(title);
                 }
                 break;
@@ -88,14 +91,14 @@ int main(int argc, char *argv[])
                 cout<<"Enter title:"<<endl;
                 string title;
                 getline(cin, title);
-                Robot *target = list->find(title);
-                if(target == NULL)
+                Robot target = list->find(title);
+                if(target.name.compare("") == 0)
                 {
                     cout<<"That robot doesn't exist in your list"<<endl;
                 }
                 else
                 {
-                    pool->addRobot(target->name, target->offensivePower, target->yearEst);
+                    pool->addRobot(target.name, target.offensivePower, target.yearEst);
                     list->deleteRobot(title);
                 }
                 break;
@@ -129,7 +132,7 @@ int main(int argc, char *argv[])
                     cout << "Enter team name" << endl;
                     string team;
                     getline(cin, team);
-                    if (list->find(team) == NULL)
+                    if (list->find(team).name.compare("") == 0)
                     {
                         cout<<"Team does not exist"<<endl;
                         break;
@@ -153,6 +156,12 @@ int main(int argc, char *argv[])
             {
                 cout <<"Goodbye!"<<endl;
                 done = true;
+                break;
+            }
+            default:
+            {
+                cout<<"Not a valid entry"<<endl;
+                break;
             }
         }
     }

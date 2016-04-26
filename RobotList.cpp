@@ -7,7 +7,7 @@
 
 RobotList::RobotList()
 {
-    //Robot *robots = new Robot[tableSize];
+    //robots = new Robot[tableSize];
 };
 
 void RobotList::printList()
@@ -15,9 +15,9 @@ void RobotList::printList()
 
     for(int i = 0; i < tableSize; i++)
     {
-        if(robots[i] != NULL && robots[i]->name.compare("") != 0) {
+        if( robots[i].name.compare("") != 0) {
 
-            cout << robots[i]->name << "(" << robots[i]->yearEst << "): " << robots[i]->offensivePower << endl;
+            cout << robots[i].name << "(" << robots[i].yearEst << "): " << robots[i].offensivePower << endl;
         }
     }
 }
@@ -27,13 +27,13 @@ void RobotList::addRobot(string n, int p, int y)
     bool added = false;
     for(int i = 0; i < tableSize; i++)
     {
-        if((robots[i] == NULL || robots[i]->name.compare("") == 0) && !added)
+        if( robots[i].name.compare("") == 0 && !added)
         {
-            robots[i] = new Robot(n, p, y);
+            robots[i] = Robot(n, p, y);
             added = true;
             break;
         }
-        else if(robots[i]->name.compare(n) == 0)
+        else if(robots[i].name.compare(n) == 0)
         {
             added = true;
             cout<<"this robot is already a part of this list"<<endl;
@@ -47,9 +47,9 @@ void RobotList::addRobot(string n, int p, int y)
 }
 
 // Merges two sections of words[] together so elements from p to q are in order
-void RobotList::mergeName(Robot *robots[], int p, int mid, int q, int size)
+void RobotList::mergeName(Robot robots[], int p, int mid, int q, int size)
 {
-    Robot *temp[size];
+    Robot *temp = new Robot[size];
 
     for (int i = p; i <= q; i++)
     {
@@ -62,7 +62,7 @@ void RobotList::mergeName(Robot *robots[], int p, int mid, int q, int size)
 
     while (i <= mid && j <= q)
     {
-        if (temp[i]->name.compare(temp[j]->name))
+        if (temp[i].name.compare(temp[j].name) < 0)
         {
             robots[k] = temp[i];
             i++;
@@ -88,11 +88,11 @@ void RobotList::mergeName(Robot *robots[], int p, int mid, int q, int size)
     }
 
     // delete the temp array so there is no memory leak
-    delete[] *temp;
+    //delete[] *temp;
 }
 
 //use a merge sort to sort the list to find the most commonly used words
-void RobotList::sortByName(Robot *robots[], int low, int high, int size)
+void RobotList::sortByName(Robot *robots, int low, int high, int size)
 {
     if (low < high)
     {
@@ -104,9 +104,9 @@ void RobotList::sortByName(Robot *robots[], int low, int high, int size)
 }
 
 // Merges two sections of words[] together so elements from p to q are in order
-void RobotList::mergeYear(Robot *robots[], int p, int mid, int q, int size)
+void RobotList::mergeYear(Robot robots[], int p, int mid, int q, int size)
 {
-    Robot *temp[size];
+    Robot *temp = new Robot[size];
 
     for (int i = p; i <= q; i++)
     {
@@ -119,7 +119,7 @@ void RobotList::mergeYear(Robot *robots[], int p, int mid, int q, int size)
 
     while (i <= mid && j <= q)
     {
-        if (temp[i]->yearEst > temp[j]->yearEst)
+        if (temp[i].yearEst > temp[j].yearEst)
         {
             robots[k] = temp[i];
             i++;
@@ -145,11 +145,11 @@ void RobotList::mergeYear(Robot *robots[], int p, int mid, int q, int size)
     }
 
     // delete the temp array so there is no memory leak
-    delete[] *temp;
+    //delete[] *temp;
 }
 
 //use a merge sort to sort the list to find the most commonly used words
-void RobotList::sortByYear(Robot *robots[], int low, int high, int size)
+void RobotList::sortByYear(Robot *robots, int low, int high, int size)
 {
     if (low < high)
     {
@@ -161,9 +161,9 @@ void RobotList::sortByYear(Robot *robots[], int low, int high, int size)
 }
 
 // Merges two sections of words[] together so elements from p to q are in order
-void RobotList::mergePower(Robot *robots[], int p, int mid, int q, int size)
+void RobotList::mergePower(Robot robots[], int p, int mid, int q, int size)
 {
-    Robot *temp[size];
+    Robot *temp = new Robot[size];
 
     for (int i = p; i <= q; i++)
     {
@@ -176,7 +176,7 @@ void RobotList::mergePower(Robot *robots[], int p, int mid, int q, int size)
 
     while (i <= mid && j <= q)
     {
-        if (temp[i]->offensivePower > temp[j]->offensivePower)
+        if (temp[i].offensivePower > temp[j].offensivePower)
         {
             robots[k] = temp[i];
             i++;
@@ -202,11 +202,11 @@ void RobotList::mergePower(Robot *robots[], int p, int mid, int q, int size)
     }
 
     // delete the temp array so there is no memory leak
-    delete[] *temp;
+    //delete[] *temp;
 }
 
 //use a merge sort to sort the list to find the most commonly used words
-void RobotList::sortByOffensivePower(Robot *robots[], int low, int high, int size)
+void RobotList::sortByOffensivePower(Robot *robots, int low, int high, int size)
 {
     if (low < high)
     {
@@ -222,9 +222,10 @@ void RobotList::sortByName()
     int top;
     for(int i = 0; i < tableSize; i++)
     {
-        if(robots[i]->name.compare("") == 0)
+
+        if(robots[i].name.compare("") == 0)
         {
-            top = i;
+            top = i-1;
             break;
         }
     }
@@ -236,7 +237,7 @@ void RobotList::sortByOffensivePower()
     int top;
     for(int i = 0; i < tableSize; i++)
     {
-        if(robots[i]->name.compare("") == 0)
+        if(robots[i].name.compare("") == 0)
         {
             top = i;
             break;
@@ -250,7 +251,7 @@ void RobotList::sortByYear()
     int top;
     for(int i = 0; i < tableSize; i++)
     {
-        if(robots[i]->name.compare("") == 0)
+        if(robots[i].name.compare("") == 0)
         {
             top = i;
             break;
@@ -282,7 +283,7 @@ void RobotList::printAlliances()
         {
             for(int i = 0; i < 3; i++)
             {
-                cout<<current->robots[i]->name<<" ";
+                cout<<current->robots[i].name<<" ";
             }
             cout<<endl;
             current = current->next;
@@ -290,42 +291,44 @@ void RobotList::printAlliances()
     }
 }
 
-Robot *RobotList::find(string name)
+Robot RobotList::find(string name)
 {
     for(int i = 0; i < tableSize; i++)
     {
-        if(robots[i] != NULL) {
-            if (robots[i]->name.compare(name) == 0) {
+            if (robots[i].name.compare(name) == 0) {
                 return robots[i];
             }
-        }
+
     }
-    return NULL;
+    return Robot("", 0, 0);
 }
 
 void RobotList::deleteRobot(string n)
 {
-    Robot *target = NULL;
+    Robot target = Robot("", 0, 0);
     int index;
     for(int i = 0; i < tableSize; i++)
     {
-        if(robots[i]->name.compare(n) == 0)
-        {
-            target = robots[i];
-            index = i;
-        }
+            if (robots[i].name.compare(n) == 0) {
+                target = robots[i];
+                index = i;
+            }
+
     }
-    if(target != NULL)
+    if(target.name.compare("") != 0)
     {
-        target->name = "";
-        target->offensivePower = 0;
-        target->yearEst = 0;
-        while(index < tableSize - 1 && robots[index+1]->name.compare("") != 0)
+        target.name = "";
+        target.offensivePower = 0;
+        target.yearEst = 0;
+        while(index < tableSize - 1 && robots[index+1].name.compare("") != 0)
         {
-            robots[index]->name = robots[index+1]->name;
-            robots[index]->offensivePower = robots[index+1]->offensivePower;
-            robots[index]->yearEst = robots[index+1]->yearEst;
+            robots[index].name = robots[index+1].name;
+            robots[index].offensivePower = robots[index+1].offensivePower;
+            robots[index].yearEst = robots[index+1].yearEst;
             index++;
         }
+        robots[index].name = "";
+        robots[index].offensivePower = 0;
+        robots[index].yearEst = 0;
     }
 }

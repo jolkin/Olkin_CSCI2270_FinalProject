@@ -15,6 +15,12 @@ struct Robot
     int offensivePower;
     int yearEst;
 
+    Robot()
+    {
+        name = "";
+        offensivePower = 0;
+        yearEst = 0;
+    }
     Robot(string n, int p, int y)
     {
         name = n;
@@ -25,8 +31,8 @@ struct Robot
 
 struct Alliance
 {
-    Robot *robots[3];
-    Alliance(Robot *r1, Robot *r2, Robot *r3)
+    Robot robots[3];
+    Alliance(Robot r1, Robot r2, Robot r3)
     {
         robots[0] = r1;
         robots[1] = r2;
@@ -43,24 +49,24 @@ public:
     void printList();
     void addRobot(string n, int p, int y);
     void deleteRobot(string n);
-    void sortByName(Robot *robots[], int low, int high, int size);
-    void sortByOffensivePower(Robot *robots[], int low, int high, int size);
-    void sortByYear(Robot *robots[], int low, int high, int size);
+    void sortByName(Robot *robots, int low, int high, int size);
+    void sortByOffensivePower(Robot *robots, int low, int high, int size);
+    void sortByYear(Robot *robots, int low, int high, int size);
     void createAlliance(string team1, string team2, string team3);
     void sortByName();
     void sortByOffensivePower();
     void sortByYear();
     void printAlliances();
-    Robot *find(string name);
+    Robot find(string name);
 
 
 private:
     int tableSize = 12;
-    Robot *robots[12];
+    Robot *robots = new Robot[12];
     Alliance *start;
-    void mergeName(Robot *robots[], int low, int mid, int high, int size);
-    void mergeYear(Robot *robots[], int low, int mid, int high, int size);
-    void mergePower(Robot *robots[], int low, int mid, int high, int size);
+    void mergeName(Robot robots[], int low, int mid, int high, int size);
+    void mergeYear(Robot robots[], int low, int mid, int high, int size);
+    void mergePower(Robot robots[], int low, int mid, int high, int size);
 };
 
 #endif //OLKIN_CSCI2270_FINALPROJECT_ROBOTLIST_H
