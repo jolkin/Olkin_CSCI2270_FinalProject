@@ -2,6 +2,8 @@
 // Created by Jake Olkin on 4/18/16.
 //
 
+#include <string>
+
 #ifndef OLKIN_CSCI2270_FINALPROJECT_ROBOTLIST_H
 #define OLKIN_CSCI2270_FINALPROJECT_ROBOTLIST_H
 
@@ -23,10 +25,9 @@ struct Robot
 
 struct Alliance
 {
-    Robot *robots[];
-    Alliance(Robot r1, Robot r2, Robot r3)
+    Robot *robots[3];
+    Alliance(Robot *r1, Robot *r2, Robot *r3)
     {
-        robots = new Robot[3];
         robots[0] = r1;
         robots[1] = r2;
         robots[2] = r3;
@@ -42,9 +43,9 @@ public:
     void printList();
     void addRobot(string n, int p, int y);
     void deleteRobot(string n);
-    void sortByName(Robot *robots, int low, int high, int size);
-    void sortByOffensivePower(Robot *robots, int low, int high, int size);
-    void sortByYear(Robot *robots, int low, int high, int size);
+    void sortByName(Robot *robots[], int low, int high, int size);
+    void sortByOffensivePower(Robot *robots[], int low, int high, int size);
+    void sortByYear(Robot *robots[], int low, int high, int size);
     void createAlliance(string team1, string team2, string team3);
     void sortByName();
     void sortByOffensivePower();
@@ -55,11 +56,11 @@ public:
 
 private:
     int tableSize = 12;
-    Robot *robots[];
+    Robot *robots[12];
     Alliance *start;
-    void mergeName(Robot *robots, int low, int high, int size);
-    void mergeYear(Robot *robots, int low, int high, int size);
-    void mergePower(Robot *robots, int low, int high, int size);
+    void mergeName(Robot *robots[], int low, int mid, int high, int size);
+    void mergeYear(Robot *robots[], int low, int mid, int high, int size);
+    void mergePower(Robot *robots[], int low, int mid, int high, int size);
 };
 
 #endif //OLKIN_CSCI2270_FINALPROJECT_ROBOTLIST_H

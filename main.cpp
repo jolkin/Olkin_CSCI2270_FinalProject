@@ -2,7 +2,7 @@
 // Created by Jake Olkin on 4/12/16.
 //
 
-#include "RobotList.h"
+#include "RobotList.cpp"
 #include <iostream>
 
 //print the menu
@@ -44,7 +44,6 @@ RobotList *createPool()
 int main(int argc, char *argv[])
 {
 
-    HashTable *movies = new HashTable();
 
     RobotList *pool = createPool();
     RobotList *list = new RobotList();
@@ -63,6 +62,7 @@ int main(int argc, char *argv[])
             case 1:
             {
                 pool->printList();
+                break;
             }
             //add a robot
             case 2:
@@ -123,7 +123,7 @@ int main(int argc, char *argv[])
             }
             case 8:
             {
-                string names[] = new string[3];
+                string names[3];
                 for(int i = 0; i < 3; i++)
                 {
                     cout << "Enter team name" << endl;
@@ -142,8 +142,14 @@ int main(int argc, char *argv[])
                 list->createAlliance(names[0], names[1], names[2]);
                 break;
             }
-                //quit
+
             case 9:
+            {
+                list->printAlliances();
+                break;
+            }
+                //quit
+            case 10:
             {
                 cout <<"Goodbye!"<<endl;
                 done = true;
