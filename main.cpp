@@ -58,6 +58,13 @@ int main(int argc, char *argv[])
         printMenu();
         string com;
         getline(cin, com);
+        
+        while(com!="1"&&com!="2"&&com!="3"&&com!="4"&&com!="5"&&com!="6"&&com!="7"&&com!="8"&&com!="9"&&com!="10"){
+	    cout << "Invalid Input. Please Enter a number between 1-10" << endl;
+	    printMenu();
+	    getline(cin,com);
+        }
+        
         int command = stoi(com);
 
         switch(command)
